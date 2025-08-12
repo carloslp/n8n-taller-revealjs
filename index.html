@@ -25,52 +25,74 @@
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
 		<style>
-			/* Custom styles using n8n Brand Colors */
-			:root {
-				--n8n-dark-bg: #1A2E46;
-				--n8n-green: #00C4A7;
-				--n8n-pink: #FF42A1;
-				--n8n-purple: #6A4C9C;
-				--n8n-light-text: #FFFFFF;
-				--n8n-dark-accent: #2c3e50;
+			   /* Custom styles using nueva paleta de colores */
+			   :root {
+				   --main-blue: #1C42E8;
+				   --yellow: #F0D224;
+				   --medium-blue: #05297A;
+				   --dark-blue: #081754;
+				   --light-blue: #1CA8F7;
+				   --beige: #EEE8E3;
+				   --white: #FFFFFF;
+				   --light-grey: #C9C9C9;
+				   --grey: #8C8C8C;
+				   --dark-grey: #4A4A4A;
+				   --black: #000000;
 
-				--r-background-color: var(--n8n-dark-bg);
-				--r-main-font: 'Inter', sans-serif;
-				--r-heading-font: 'Inter', sans-serif;
-				--r-main-font-size: 36px;
-				--r-main-color: var(--n8n-light-text);
-				--r-heading-color: var(--n8n-light-text);
-				--r-heading-font-weight: 700;
-				--r-link-color: var(--n8n-green);
-				--r-link-color-hover: var(--n8n-pink);
-			}
+				   --r-background-color: var(--dark-blue);
+				   --r-main-font: 'Inter', sans-serif;
+				   --r-heading-font: 'Inter', sans-serif;
+				   --r-main-font-size: 36px;
+				   --r-main-color: var(--beige);
+				   --r-heading-color: var(--yellow);
+				   --r-heading-font-weight: 700;
+				   --r-link-color: var(--light-blue);
+				   --r-link-color-hover: var(--yellow);
+			   }
 
-			.reveal .tag {
-				display: inline-block;
-				background-color: var(--n8n-dark-accent);
-				color: #fff;
-				padding: 5px 15px;
-				border-radius: 9999px;
-				font-size: 0.6em;
-				margin: 5px;
-			}
+			   .reveal .tag {
+				   display: inline-block;
+				   background-color: var(--yellow);
+				   color: var(--dark-blue);
+				   padding: 5px 15px;
+				   border-radius: 9999px;
+				   font-size: 0.6em;
+				   margin: 5px;
+				   font-weight: bold;
+			   }
 
-			.reveal .concept-box {
-				background-color: rgba(0, 0, 0, 0.15);
-				border-left-width: 4px;
-				padding: 1rem;
-				border-radius: 8px;
-				text-align: left;
-			}
+			   .reveal .concept-box {
+				   background-color: rgba(28,66,232,0.10); /* main-blue con opacidad */
+				   border-left: 4px solid var(--yellow);
+				   padding: 1rem;
+				   border-radius: 8px;
+				   text-align: left;
+				   color: var(--beige);
+			   }
 
-			/* Custom text and border colors */
-			.text-n8n-green { color: var(--n8n-green); }
-			.text-n8n-purple { color: var(--n8n-purple); }
-			.text-n8n-pink { color: var(--n8n-pink); }
+			   /* Custom text and border colors */
+			   .text-main-blue { color: var(--main-blue); }
+			   .text-yellow { color: var(--yellow); }
+			   .text-medium-blue { color: var(--medium-blue); }
+			   .text-dark-blue { color: var(--dark-blue); }
+			   .text-light-blue { color: var(--light-blue); }
+			   .text-beige { color: var(--beige); }
+			   .text-white { color: var(--white); }
+			   .text-light-grey { color: var(--light-grey); }
+			   .text-grey { color: var(--grey); }
+			   .text-dark-grey { color: var(--dark-grey); }
+			   .text-black { color: var(--black); }
 
-			.border-n8n-green { border-left-color: var(--n8n-green); }
-			.border-n8n-purple { border-left-color: var(--n8n-purple); }
-			.border-n8n-pink { border-left-color: var(--n8n-pink); }
+			   .border-main-blue { border-left-color: var(--main-blue); }
+			   .border-yellow { border-left-color: var(--yellow); }
+			   .border-medium-blue { border-left-color: var(--medium-blue); }
+			   .border-dark-blue { border-left-color: var(--dark-blue); }
+			   .border-light-blue { border-left-color: var(--light-blue); }
+			   .border-beige { border-left-color: var(--beige); }
+			   .border-light-grey { border-left-color: var(--light-grey); }
+			   .border-grey { border-left-color: var(--grey); }
+			   .border-dark-grey { border-left-color: var(--dark-grey); }
+			   .border-black { border-left-color: var(--black); }
 		</style>
 	</head>
 	<body>
@@ -162,45 +184,52 @@
 					</section>
 				</section>
 
-				<!-- Slide 5: Popular Nodes -->
-				<section>
-					<h2>Nodos Esenciales y Populares</h2>
-					<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-						<div class="fragment">
-							<h3 class="text-n8n-green">Disparadores (Triggers)</h3>
-							<ul class="list-disc list-inside text-xl">
-								<li><strong class="text-white">Cron:</strong> Ejecuta workflows en un horario fijo.</li>
-								<li><strong class="text-white">Webhook:</strong> Inicia un workflow con una petición HTTP.</li>
-								<li><strong class="text-white">App Triggers:</strong> (GitHub, GitLab, Stripe, etc.)</li>
-							</ul>
-						</div>
-						<div class="fragment">
-							<h3 class="text-n8n-purple">Lógica Principal</h3>
-							<ul class="list-disc list-inside text-xl">
-								<li><strong class="text-white">HTTP Request:</strong> La navaja suiza para cualquier API.</li>
-								<li><strong class="text-white">Code:</strong> Ejecuta tu propio código JS/TS.</li>
-								<li><strong class="text-white">IF / Switch:</strong> Bifurca el flujo basado en condiciones.</li>
-								<li><strong class="text-white">Merge:</strong> Combina datos de diferentes ramas.</li>
-							</ul>
-						</div>
-						<div class="fragment">
-							<h3 class="text-n8n-pink">Integraciones Comunes</h3>
-							<ul class="list-disc list-inside text-xl">
-								<li><strong class="text-white">Bases de Datos:</strong> Postgres, MySQL, MongoDB...</li>
-								<li><strong class="text-white">Mensajería:</strong> Slack, Discord, Telegram, Email.</li>
-								<li><strong class="text-white">Cloud:</strong> AWS (S3, Lambda), GCP, Azure.</li>
-							</ul>
-						</div>
-						<div class="fragment">
-							<h3 class="text-n8n-green">Procesamiento de Datos</h3>
-							<ul class="list-disc list-inside text-xl">
-								<li><strong class="text-white">Set:</strong> Modifica o crea campos en los items.</li>
-								<li><strong class="text-white">Edit Fields:</strong> Renombra, elimina o reordena campos.</li>
-								<li><strong class="text-white">Read Binary File:</strong> Lee archivos para procesarlos.</li>
-							</ul>
-						</div>
-					</div>
-				</section>
+				   <!-- Slide 5: Nodos Esenciales -->
+				   <section>
+					   <h2>Nodos Esenciales</h2>
+					   <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+						   <div class="fragment">
+							   <h3 class="text-n8n-green">Disparadores (Triggers)</h3>
+							   <ul class="list-disc list-inside text-xl">
+								   <li><strong class="text-white">Cron:</strong> Ejecuta workflows en un horario fijo.</li>
+								   <li><strong class="text-white">Webhook:</strong> Inicia un workflow con una petición HTTP.</li>
+								   <li><strong class="text-white">App Triggers:</strong> (GitHub, GitLab, Stripe, etc.)</li>
+							   </ul>
+						   </div>
+						   <div class="fragment">
+							   <h3 class="text-n8n-purple">Lógica Principal</h3>
+							   <ul class="list-disc list-inside text-xl">
+								   <li><strong class="text-white">HTTP Request:</strong> La navaja suiza para cualquier API.</li>
+								   <li><strong class="text-white">Code:</strong> Ejecuta tu propio código JS/TS.</li>
+								   <li><strong class="text-white">IF / Switch:</strong> Bifurca el flujo basado en condiciones.</li>
+								   <li><strong class="text-white">Merge:</strong> Combina datos de diferentes ramas.</li>
+							   </ul>
+						   </div>
+					   </div>
+				   </section>
+
+				   <!-- Slide 6: Nodos Populares -->
+				   <section>
+					   <h2>Nodos Populares</h2>
+					   <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+						   <div class="fragment">
+							   <h3 class="text-n8n-pink">Integraciones Comunes</h3>
+							   <ul class="list-disc list-inside text-xl">
+								   <li><strong class="text-white">Bases de Datos:</strong> Postgres, MySQL, MongoDB...</li>
+								   <li><strong class="text-white">Mensajería:</strong> Slack, Discord, Telegram, Email.</li>
+								   <li><strong class="text-white">Cloud:</strong> AWS (S3, Lambda), GCP, Azure.</li>
+							   </ul>
+						   </div>
+						   <div class="fragment">
+							   <h3 class="text-n8n-green">Procesamiento de Datos</h3>
+							   <ul class="list-disc list-inside text-xl">
+								   <li><strong class="text-white">Set:</strong> Modifica o crea campos en los items.</li>
+								   <li><strong class="text-white">Edit Fields:</strong> Renombra, elimina o reordena campos.</li>
+								   <li><strong class="text-white">Read Binary File:</strong> Lee archivos para procesarlos.</li>
+							   </ul>
+						   </div>
+					   </div>
+				   </section>
 
 				<!-- Slide 6: Extensibility -->
 				<section>
