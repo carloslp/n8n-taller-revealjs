@@ -8,7 +8,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy static site content
-COPY index.html /usr/share/nginx/html/index.html
+COPY presentaciones /usr/share/nginx/html/
 
 # Expose port 80
 EXPOSE 80
