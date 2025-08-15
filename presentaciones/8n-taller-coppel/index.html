@@ -1,332 +1,413 @@
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Introducción a n8n para Desarrolladores</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<!-- Reveal.js CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-		
-		<!-- Theme is overridden by custom styles, but we keep a base -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css" id="theme">
+	<title>Introducción a n8n para Desarrolladores</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
+	<!-- Reveal.js CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
 
-		<!-- Tailwind CSS for additional styling -->
-		<script src="https://cdn.tailwindcss.com"></script>
+	<!-- Theme is overridden by custom styles, but we keep a base -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css" id="theme">
 
-		<!-- Font -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
 
-		<style>
-			   /* Custom styles using nueva paleta de colores */
-			   :root {
-				   --main-blue: #1C42E8;
-				   --yellow: #F0D224;
-				   --medium-blue: #05297A;
-				   --dark-blue: #081754;
-				   --light-blue: #1CA8F7;
-				   --beige: #EEE8E3;
-				   --white: #FFFFFF;
-				   --light-grey: #C9C9C9;
-				   --grey: #8C8C8C;
-				   --dark-grey: #4A4A4A;
-				   --black: #000000;
+	<!-- Tailwind CSS for additional styling -->
+	<script src="https://cdn.tailwindcss.com"></script>
 
-				   --r-background-color: var(--dark-blue);
-				   --r-main-font: 'Inter', sans-serif;
-				   --r-heading-font: 'Inter', sans-serif;
-				   --r-main-font-size: 36px;
-				   --r-main-color: var(--beige);
-				   --r-heading-color: var(--yellow);
-				   --r-heading-font-weight: 700;
-				   --r-link-color: var(--light-blue);
-				   --r-link-color-hover: var(--yellow);
-			   }
+	<!-- Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-			   .reveal .tag {
-				   display: inline-block;
-				   background-color: var(--yellow);
-				   color: var(--dark-blue);
-				   padding: 5px 15px;
-				   border-radius: 9999px;
-				   font-size: 0.6em;
-				   margin: 5px;
-				   font-weight: bold;
-			   }
+	<style>
+		/* Custom styles using nueva paleta de colores */
+		:root {
+			--main-blue: #1C42E8;
+			--yellow: #F0D224;
+			--medium-blue: #05297A;
+			--dark-blue: #081754;
+			--light-blue: #1CA8F7;
+			--beige: #EEE8E3;
+			--white: #FFFFFF;
+			--light-grey: #C9C9C9;
+			--grey: #8C8C8C;
+			--dark-grey: #4A4A4A;
+			--black: #000000;
 
-			   .reveal .concept-box {
-				   background-color: rgba(28,66,232,0.10); /* main-blue con opacidad */
-				   border-left: 4px solid var(--yellow);
-				   padding: 1rem;
-				   border-radius: 8px;
-				   text-align: left;
-				   color: var(--beige);
-			   }
+			--r-background-color: var(--dark-blue);
+			--r-main-font: 'Inter', sans-serif;
+			--r-heading-font: 'Inter', sans-serif;
+			--r-main-font-size: 36px;
+			--r-main-color: var(--beige);
+			--r-heading-color: var(--yellow);
+			--r-heading-font-weight: 700;
+			--r-link-color: var(--light-blue);
+			--r-link-color-hover: var(--yellow);
+		}
 
-			   /* Custom text and border colors */
-			   .text-main-blue { color: var(--main-blue); }
-			   .text-yellow { color: var(--yellow); }
-			   .text-medium-blue { color: var(--medium-blue); }
-			   .text-dark-blue { color: var(--dark-blue); }
-			   .text-light-blue { color: var(--light-blue); }
-			   .text-beige { color: var(--beige); }
-			   .text-white { color: var(--white); }
-			   .text-light-grey { color: var(--light-grey); }
-			   .text-grey { color: var(--grey); }
-			   .text-dark-grey { color: var(--dark-grey); }
-			   .text-black { color: var(--black); }
+		.reveal .tag {
+			display: inline-block;
+			background-color: var(--yellow);
+			color: var(--dark-blue);
+			padding: 5px 15px;
+			border-radius: 9999px;
+			font-size: 0.6em;
+			margin: 5px;
+			font-weight: bold;
+		}
 
-			   .border-main-blue { border-left-color: var(--main-blue); }
-			   .border-yellow { border-left-color: var(--yellow); }
-			   .border-medium-blue { border-left-color: var(--medium-blue); }
-			   .border-dark-blue { border-left-color: var(--dark-blue); }
-			   .border-light-blue { border-left-color: var(--light-blue); }
-			   .border-beige { border-left-color: var(--beige); }
-			   .border-light-grey { border-left-color: var(--light-grey); }
-			   .border-grey { border-left-color: var(--grey); }
-			   .border-dark-grey { border-left-color: var(--dark-grey); }
-			   .border-black { border-left-color: var(--black); }
-		</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<!-- Slide 1: Title -->
-				<section>
-					<h1 class="text-6xl text-n8n-green">Introducción a n8n</h1>
-					<p class="mt-4">Automatización de Flujos de Trabajo para Equipos de Desarrollo</p>
-					<img src="https://raw.githubusercontent.com/n8n-io/n8n-docs/master/assets/n8n-logo-symbol.svg" alt="n8n Logo" style="height: 120px; margin: 20px auto; border: none; background: none; box-shadow: none;">
-				</section>
+		.reveal .concept-box {
+			background-color: rgba(28, 66, 232, 0.10);
+			/* main-blue con opacidad */
+			border-left: 4px solid var(--yellow);
+			padding: 1rem;
+			border-radius: 8px;
+			text-align: left;
+			color: var(--beige);
+		}
 
-				<!-- Slide 2: What is n8n? -->
-				<section>
-					<h2>¿Qué es n8n?</h2>
-					<p class="mt-8 text-left text-2xl">
-						Una herramienta de **automatización de flujos de trabajo** pensada para desarrolladores. Conecta APIs, procesa datos y orquesta tareas complejas de forma visual.
-					</p>
-					<div class="mt-12 flex justify-around">
-						<span class="tag">Open-Source (Fair-Code)</span>
-						<span class="tag">Auto-alojable (Self-hosted)</span>
-						<span class="tag">Extensible con JS/TS</span>
+		/* Custom text and border colors */
+		.text-main-blue {
+			color: var(--main-blue);
+		}
+
+		.text-yellow {
+			color: var(--yellow);
+		}
+
+		.text-medium-blue {
+			color: var(--medium-blue);
+		}
+
+		.text-dark-blue {
+			color: var(--dark-blue);
+		}
+
+		.text-light-blue {
+			color: var(--light-blue);
+		}
+
+		.text-beige {
+			color: var(--beige);
+		}
+
+		.text-white {
+			color: var(--white);
+		}
+
+		.text-light-grey {
+			color: var(--light-grey);
+		}
+
+		.text-grey {
+			color: var(--grey);
+		}
+
+		.text-dark-grey {
+			color: var(--dark-grey);
+		}
+
+		.text-black {
+			color: var(--black);
+		}
+
+		.border-main-blue {
+			border-left-color: var(--main-blue);
+		}
+
+		.border-yellow {
+			border-left-color: var(--yellow);
+		}
+
+		.border-medium-blue {
+			border-left-color: var(--medium-blue);
+		}
+
+		.border-dark-blue {
+			border-left-color: var(--dark-blue);
+		}
+
+		.border-light-blue {
+			border-left-color: var(--light-blue);
+		}
+
+		.border-beige {
+			border-left-color: var(--beige);
+		}
+
+		.border-light-grey {
+			border-left-color: var(--light-grey);
+		}
+
+		.border-grey {
+			border-left-color: var(--grey);
+		}
+
+		.border-dark-grey {
+			border-left-color: var(--dark-grey);
+		}
+
+		.border-black {
+			border-left-color: var(--black);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- Slide 1: Title -->
+			<section>
+				<h1 class="text-6xl text-n8n-green">Introducción a n8n</h1>
+				<p class="mt-4">Automatización de Flujos de Trabajo para Equipos de Desarrollo</p>
+				<img src="n8n-color.png" alt="n8n Logo"
+					style="height: 120px; margin: 20px auto; border: none; background: none; box-shadow: none;">
+			</section>
+
+			<!-- Slide 2: What is n8n? -->
+			<section>
+				<h2>¿Qué es n8n?</h2>
+				<p class="mt-8 text-left text-2xl">
+					n8n (se pronuncia "en-ocho-en") te ayuda a conectar cualquier aplicación con API con otra, y
+					manipular sus datos con poco o nada de código.
+				</p>
+				<ul class="mt-8 text-left text-xl space-y-2">
+					<li><span class="text-n8n-green font-bold">Personalizable:</span> Workflows altamente flexibles y
+						opción de crear nodos personalizados.</li>
+					<li><span class="text-n8n-purple font-bold">Conveniente:</span> Prueba n8n usando npm, Docker o la
+						opción Cloud si prefieres no gestionar la infraestructura.</li>
+					<li><span class="text-n8n-pink font-bold">Enfocado en privacidad:</span> Aloja n8n tú mismo para
+						máxima privacidad y seguridad.</li>
+				</ul>
+			</section>
+
+			<!-- Slide 3: Key Concepts -->
+			<section>
+				<h2>Conceptos Clave</h2>
+				<div class="flex flex-col space-y-4 mt-8">
+					<div class="fragment concept-box border-n8n-green">
+						<h3 class="text-2xl text-n8n-green">Nodos (Nodes)</h3>
+						<p class="text-xl">Bloques de construcción. Un nodo puede ser un trigger, una app (GitHub, AWS
+							S3) o una función lógica (IF, Merge, Code).</p>
 					</div>
-					<p class="mt-8 text-lg fragment">Es como Zapier, pero en lugar de ser una caja negra, te da las llaves del motor.</p>
-				</section>
-
-				<!-- Slide 3: Key Concepts -->
-				<section>
-					<h2>Conceptos Clave</h2>
-					<div class="flex flex-col space-y-4 mt-8">
-						<div class="fragment concept-box border-n8n-green">
-							<h3 class="text-2xl text-n8n-green">Nodos (Nodes)</h3>
-							<p class="text-xl">Bloques de construcción. Un nodo puede ser un trigger, una app (GitHub, AWS S3) o una función lógica (IF, Merge, Code).</p>
-						</div>
-						<div class="fragment concept-box border-n8n-purple">
-							<h3 class="text-2xl text-n8n-purple">Items (Estructura de Datos)</h3>
-							<p class="text-xl">La data fluye entre nodos como un <span class="font-mono text-yellow-300">array de objetos JSON</span>. Cada nodo procesa estos items y pasa el resultado al siguiente.</p>
-						</div>
-						<div class="fragment concept-box border-n8n-pink">
-							<h3 class="text-2xl text-n8n-pink">Workflows</h3>
-							<p class="text-xl">El lienzo donde se conectan los nodos. <span class="fragment">(Dato curioso: los workflows son JSON, ¡perfectos para versionar con Git!)</span></p>
-						</div>
+					<div class="fragment concept-box border-n8n-purple">
+						<h3 class="text-2xl text-n8n-purple">Items (Estructura de Datos)</h3>
+						<p class="text-xl">La data fluye entre nodos como un <span
+								class="font-mono text-yellow-300">array de objetos JSON</span>. Cada nodo procesa estos
+							items y pasa el resultado al siguiente.</p>
 					</div>
-				</section>
-				
-				<!-- Slide 4: Practical Example for Devs -->
-				<section>
-					<section>
-						<h2>Ejemplo: Notificar Commits en Slack</h2>
-						<p class="text-2xl mt-4">Un workflow que se activa con un `push` a GitHub, procesa los datos y notifica a un canal de Slack.</p>
-					</section>
-					<section>
-						<h3>Paso 1: El Trigger (GitHub Webhook)</h3>
-						<p>Usamos el nodo **GitHub Trigger** que escucha eventos de `push` en un repositorio y rama específicos.</p>
-						<div class="mt-8 p-4 concept-box border-n8n-green">
-							<p class="font-bold text-n8n-green">Nodo: GitHub Trigger</p>
-							<p>Evento: <span class="font-mono text-yellow-300">Push</span></p>
-							<p>Repo: <span class="font-mono text-yellow-300">"equipo/proyecto-core"</span></p>
-						</div>
-					</section>
-					<section>
-						<h3>Paso 2: Procesar Datos (Code Node)</h3>
-						<p>Un nodo de **Code** para ejecutar JS y formatear los datos del webhook de forma limpia.</p>
-						<pre><code class="language-javascript" data-trim data-noescape>
-							// Extraer solo la info que necesitamos
-							const commit = $json.body.head_commit;
-							const committer = commit.committer.name;
-							const message = commit.message;
-							const url = commit.url;
-
-							// Retornar un nuevo objeto para el siguiente nodo
-							return [{
-							  committer,
-							  message,
-							  url
-							}];
-						</code></pre>
-					</section>
-					<section>
-						<h3>Paso 3: Notificar (Slack Node)</h3>
-						<p>Usamos expresiones para construir un mensaje dinámico en Slack con los datos del nodo anterior.</p>
-						<div class="mt-8 p-4 concept-box border-n8n-purple">
-							<p class="font-bold text-n8n-purple">Mensaje en Slack:</p>
-							<p class="font-mono text-lg mt-2">
-								Nuevo commit en `main` por <span class="text-yellow-300">{{$json["committer"]}}</span>: <br>
-								<a href="{{$json["url"]}}">"{{$json["message"]}}"</a>
-							</p>
-						</div>
-					</section>
-				</section>
-
-				   <!-- Slide 5: Nodos Esenciales -->
-				   <section>
-					   <h2>Nodos Esenciales</h2>
-					   <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-						   <div class="fragment">
-							   <h3 class="text-n8n-green">Disparadores (Triggers)</h3>
-							   <ul class="list-disc list-inside text-xl">
-								   <li><strong class="text-white">Cron:</strong> Ejecuta workflows en un horario fijo.</li>
-								   <li><strong class="text-white">Webhook:</strong> Inicia un workflow con una petición HTTP.</li>
-								   <li><strong class="text-white">App Triggers:</strong> (GitHub, GitLab, Stripe, etc.)</li>
-							   </ul>
-						   </div>
-						   <div class="fragment">
-							   <h3 class="text-n8n-purple">Lógica Principal</h3>
-							   <ul class="list-disc list-inside text-xl">
-								   <li><strong class="text-white">HTTP Request:</strong> La navaja suiza para cualquier API.</li>
-								   <li><strong class="text-white">Code:</strong> Ejecuta tu propio código JS/TS.</li>
-								   <li><strong class="text-white">IF / Switch:</strong> Bifurca el flujo basado en condiciones.</li>
-								   <li><strong class="text-white">Merge:</strong> Combina datos de diferentes ramas.</li>
-							   </ul>
-						   </div>
-					   </div>
-				   </section>
-
-				   <!-- Slide 6: Nodos Populares -->
-				   <section>
-					   <h2>Nodos Populares</h2>
-					   <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-						   <div class="fragment">
-							   <h3 class="text-n8n-pink">Integraciones Comunes</h3>
-							   <ul class="list-disc list-inside text-xl">
-								   <li><strong class="text-white">Bases de Datos:</strong> Postgres, MySQL, MongoDB...</li>
-								   <li><strong class="text-white">Mensajería:</strong> Slack, Discord, Telegram, Email.</li>
-								   <li><strong class="text-white">Cloud:</strong> AWS (S3, Lambda), GCP, Azure.</li>
-							   </ul>
-						   </div>
-						   <div class="fragment">
-							   <h3 class="text-n8n-green">Procesamiento de Datos</h3>
-							   <ul class="list-disc list-inside text-xl">
-								   <li><strong class="text-white">Set:</strong> Modifica o crea campos en los items.</li>
-								   <li><strong class="text-white">Edit Fields:</strong> Renombra, elimina o reordena campos.</li>
-								   <li><strong class="text-white">Read Binary File:</strong> Lee archivos para procesarlos.</li>
-							   </ul>
-						   </div>
-					   </div>
-				   </section>
-
-				<!-- Slide 6: Extensibility -->
-				<section>
-					<h2>Un Playground para Desarrolladores</h2>
-					<p>n8n no es una caja cerrada, es un framework.</p>
-					<div class="mt-8 text-left text-xl space-y-4">
-						<div class="fragment">
-							<h3 class="text-n8n-green">Nodo `Code`</h3>
-							<p>Ejecuta JS/Node.js arbitrario. Puedes usar `require()` para importar librerías de npm. Ideal para transformaciones de datos complejas o lógica de negocio específica.</p>
-						</div>
-						<div class="fragment">
-							<h3 class="text-n8n-purple">Nodo `HTTP Request`</h3>
-							<p>El conector universal. Interactúa con cualquier API REST, interna o externa. Soporta OAuth2, Bearer Token, etc.</p>
-						</div>
-						<div class="fragment">
-							<h3 class="text-n8n-pink">Nodos Personalizados</h3>
-							<p>¿Necesitas una integración reutilizable? Construye tu propio nodo con el Node Development Kit (NDK). Es un simple archivo `*.node.ts`.</p>
-						</div>
-						<div class="fragment">
-							<h3 class="text-n8n-green">API de n8n</h3>
-							<p>Gestiona workflows, credenciales y ejecuciones de forma programática a través de la propia API REST de n8n.</p>
-						</div>
+					<div class="fragment concept-box border-n8n-pink">
+						<h3 class="text-2xl text-n8n-pink">Workflows</h3>
+						<p class="text-xl">El lienzo donde se conectan los nodos. <span class="fragment">(Dato curioso:
+								los workflows son JSON, ¡perfectos para versionar con Git!)</span></p>
 					</div>
-				</section>
-				
-				<!-- Slide 7: Architecture & Self-Hosting -->
-				<section>
-					<h2>Arquitectura y Auto-alojamiento</h2>
-					<p>Control total sobre la ejecución y los datos.</p>
-					<div class="mt-8 text-left text-xl">
-						<p class="fragment"><span class="text-n8n-green font-bold">Opciones de Despliegue:</span> Docker, Docker Compose, Kubernetes (Helm Chart), o directamente con npm.</p>
-						<p class="fragment mt-4"><span class="text-n8n-green font-bold">Escalabilidad:</span> n8n puede escalar horizontalmente configurando múltiples "workers" para procesar ejecuciones en paralelo.</p>
-						<p class="fragment mt-4"><span class="text-n8n-green font-bold">Beneficios para Devs:</span></p>
-						<ul class="mt-2 list-disc list-inside">
-							<li class="fragment">Los datos y credenciales nunca salen de tu VPC/red.</li>
-							<li class="fragment">Conecta de forma segura con servicios internos (DBs, APIs privadas).</li>
-							<li class="fragment">Sin límites artificiales de ejecución. El límite lo pone tu infraestructura.</li>
+				</div>
+			</section>
+
+
+			<!-- Slide 5: Nodos Esenciales -->
+			<section>
+				<h2>Nodos Esenciales</h2>
+				<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+					<div class="fragment">
+						<h3 class="text-n8n-green">Disparadores (Triggers)</h3>
+						<ul class="list-disc list-inside text-xl">
+							<li><strong class="text-white">Cron:</strong> Ejecuta workflows en un horario fijo.</li>
+							<li><strong class="text-white">Webhook:</strong> Inicia un workflow con una petición HTTP.
+							</li>
+							<li><strong class="text-white">App Triggers:</strong> (GitHub, GitLab, Stripe, etc.)</li>
 						</ul>
 					</div>
-				</section>
-
-				<!-- Slide 8: Why use n8n? -->
-				<section>
-					<h2>¿Por qué n8n para un equipo de Devs?</h2>
-					<div class="r-stack">
-						<div class="fragment fade-out" data-fragment-index="0">
-							<h3 class="text-n8n-green">Source-available y Extensible</h3>
-							<p>El código está disponible. Puedes entender cómo funciona, depurar y extenderlo. No hay cajas negras.</p>
-						</div>
-						<div class="fragment fade-in-then-out" data-fragment-index="0">
-							<h3 class="text-n8n-purple">Integración con el Ecosistema Dev</h3>
-							<p>Los workflows como código (JSON/Git), despliegue con Docker/K8s, y la capacidad de construir tus propias herramientas.</p>
-						</div>
-						<div class="fragment fade-in-then-out" data-fragment-index="1">
-							<h3 class="text-n8n-pink">Seguridad y Cumplimiento</h3>
-							<p>Al ser auto-alojado, cumple con las políticas de seguridad más estrictas. Ideal para entornos regulados.</p>
-						</div>
-						<div class="fragment fade-in" data-fragment-index="2">
-							<h3 class="text-n8n-green">Acelera el "Glue Code"</h3>
-							<p>Reduce drásticamente el tiempo dedicado a escribir código repetitivo para conectar servicios. Permite enfocarse en la lógica de negocio.</p>
-						</div>
+					<div class="fragment">
+						<h3 class="text-n8n-purple">Lógica Principal</h3>
+						<ul class="list-disc list-inside text-xl">
+							<li><strong class="text-white">HTTP Request:</strong> La navaja suiza para cualquier API.
+							</li>
+							<li><strong class="text-white">Code:</strong> Ejecuta tu propio código JS/TS.</li>
+							<li><strong class="text-white">IF / Switch:</strong> Bifurca el flujo basado en condiciones.
+							</li>
+							<li><strong class="text-white">Merge:</strong> Combina datos de diferentes ramas.</li>
+						</ul>
 					</div>
-				</section>
+				</div>
+			</section>
 
-				<!-- Slide 9: Getting Started -->
-				<section>
-					<h2>Primeros Pasos</h2>
-					<p>¡Empieza a automatizar en minutos!</p>
-					<ul class="mt-8 text-2xl" style="list-style: none;">
-						<li class="fragment">1. Levanta una instancia local con Docker: <br>
-							<pre><code class="language-bash" data-trim data-noescape>
-								docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
-							</code></pre>
-						</li>
-						<li class="fragment">2. Explora los workflows de la comunidad en <a href="https://n8n.io/workflows/" target="_blank">n8n.io/workflows</a></li>
-						<li class="fragment">3. Revisa el código y contribuye en <a href="https://github.com/n8n-io/n8n" target="_blank">GitHub</a>.</li>
+			<!-- Slide 6: Nodos Populares -->
+			<section>
+				<h2>Nodos Populares</h2>
+				<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+					<div class="fragment">
+						<h3 class="text-n8n-pink">Integraciones Comunes</h3>
+						<ul class="list-disc list-inside text-xl">
+							<li><strong class="text-white">Bases de Datos:</strong> Postgres, MySQL, MongoDB...</li>
+							<li><strong class="text-white">Mensajería:</strong> Slack, Discord, Telegram, Email.</li>
+							<li><strong class="text-white">Cloud:</strong> AWS (S3, Lambda), GCP, Azure.</li>
+						</ul>
+					</div>
+					<div class="fragment">
+						<h3 class="text-n8n-green">Procesamiento de Datos</h3>
+						<ul class="list-disc list-inside text-xl">
+							<li><strong class="text-white">Set:</strong> Modifica o crea campos en los items.</li>
+							<li><strong class="text-white">Edit Fields:</strong> Renombra, elimina o reordena campos.
+							</li>
+							<li><strong class="text-white">Read Binary File:</strong> Lee archivos para procesarlos.
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Slide 6: Extensibility -->
+			<section>
+				<h2>Un Playground para Desarrolladores</h2>
+				<p>n8n no es una caja cerrada, es un framework.</p>
+				<div class="mt-8 text-left text-xl space-y-4">
+					<div class="fragment">
+						<h3 class="text-n8n-green">Nodo `Code`</h3>
+						<p>Ejecuta JS/Node.js arbitrario. Puedes usar `require()` para importar librerías de npm. Ideal
+							para transformaciones de datos complejas o lógica de negocio específica.</p>
+					</div>
+					<div class="fragment">
+						<h3 class="text-n8n-purple">Nodo `HTTP Request`</h3>
+						<p>El conector universal. Interactúa con cualquier API REST, interna o externa. Soporta OAuth2,
+							Bearer Token, etc.</p>
+					</div>
+					<div class="fragment">
+						<h3 class="text-n8n-pink">Nodos Personalizados</h3>
+						<p>¿Necesitas una integración reutilizable? Construye tu propio nodo con el Node Development Kit
+							(NDK). Es un simple archivo `*.node.ts`.</p>
+					</div>
+					<div class="fragment">
+						<h3 class="text-n8n-green">API de n8n</h3>
+						<p>Gestiona workflows, credenciales y ejecuciones de forma programática a través de la propia
+							API REST de n8n.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Slide 7: Architecture & Self-Hosting -->
+			<section>
+				<h2>Arquitectura y Auto-alojamiento</h2>
+				<p>Control total sobre la ejecución y los datos.</p>
+				<div class="mt-8 text-left text-xl">
+					<p class="fragment"><span class="text-n8n-green font-bold">Opciones de Despliegue:</span> Docker,
+						Docker Compose, Kubernetes (Helm Chart), o directamente con npm.</p>
+					<p class="fragment mt-4"><span class="text-n8n-green font-bold">Escalabilidad:</span> n8n puede
+						escalar horizontalmente configurando múltiples "workers" para procesar ejecuciones en paralelo.
+					</p>
+					<p class="fragment mt-4"><span class="text-n8n-green font-bold">Beneficios para Devs:</span></p>
+					<ul class="mt-2 list-disc list-inside">
+						<li class="fragment">Los datos y credenciales nunca salen de tu VPC/red.</li>
+						<li class="fragment">Conecta de forma segura con servicios internos (DBs, APIs privadas).</li>
+						<li class="fragment">Sin límites artificiales de ejecución. El límite lo pone tu
+							infraestructura.</li>
 					</ul>
-				</section>
+				</div>
+			</section>
 
-				<!-- Slide 10: Questions -->
-				<section>
-					<h2 class="text-6xl">¿Preguntas?</h2>
-				</section>
+			<!-- Slide 8: Why use n8n? -->
+			<section>
+				<h2>¿Por qué n8n para un equipo de Devs?</h2>
+				<div class="r-stack">
+					<div class="fragment fade-out" data-fragment-index="0">
+						<h3 class="text-n8n-green">Source-available y Extensible</h3>
+						<p>El código está disponible. Puedes entender cómo funciona, depurar y extenderlo. No hay cajas
+							negras.</p>
+					</div>
+					<div class="fragment fade-in-then-out" data-fragment-index="0">
+						<h3 class="text-n8n-purple">Integración con el Ecosistema Dev</h3>
+						<p>Los workflows como código (JSON/Git), despliegue con Docker/K8s, y la capacidad de construir
+							tus propias herramientas.</p>
+					</div>
+					<div class="fragment fade-in-then-out" data-fragment-index="1">
+						<h3 class="text-n8n-pink">Seguridad y Cumplimiento</h3>
+						<p>Al ser auto-alojado, cumple con las políticas de seguridad más estrictas. Ideal para entornos
+							regulados.</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<h3 class="text-n8n-green">Acelera el "Glue Code"</h3>
+						<p>Reduce drásticamente el tiempo dedicado a escribir código repetitivo para conectar servicios.
+							Permite enfocarse en la lógica de negocio.</p>
+					</div>
+				</div>
+			</section>
 
-			</div>
+			<!-- Slide 9: Getting Started -->
+			<section>
+				<h2>Primeros Pasos</h2>
+				<p>¡Empieza a automatizar en minutos!</p>
+				<ul class="mt-8 text-2xl" style="list-style: none;">
+					<li class="fragment">1. Levanta una instancia local con <span
+							class="text-n8n-green font-bold">Docker Compose</span>: <br>
+						<pre><code class="language-yaml" data-trim data-noescape>
+	services:
+		n8n:
+			container_name: n8n
+			image: docker.n8n.io/n8nio/n8n
+			ports:
+				- "5678:5678"
+			environment:
+				- GENERIC_TIMEZONE=America/Mazatlan
+				- TZ=America/Mazatlan
+				- N8N_SECURE_COOKIE=false
+				- NODE_ENV=production
+				- N8N_PROTOCOL=https
+				- N8N_HOST=
+				- N8N_DIAGNOSTICS_ENABLED=false
+				- N8N_EMAIL_MODE=smtp
+				- N8N_SMTP_HOST=
+				- N8N_SMTP_PORT=
+				- N8N_SMTP_USER=
+				- N8N_SMTP_PASS=
+				- N8N_SMTP_SENDER
+				- N8N_SMTP_SSL=false
+				- WEBHOOK_URL=https://n8n.cgve.app
+				- N8N_EDITOR_BASE_URL=https://n8n.cgve.app
+			volumes:
+				- ./data:/home/node/.n8n
+			# Puedes agregar más variables según tu entorno
+			# Ejecuta con: docker compose up -d
+			# Accede en https://n8n.cgve.app
+			# Revisa la documentación oficial para más detalles
+			# https://docs.n8n.io/hosting/installation/docker-compose/
+			</code></pre>
+					</li>
+					<li class="fragment">2. Explora los workflows de la comunidad en <a href="https://n8n.io/workflows/"
+							target="_blank">n8n.io/workflows</a></li>
+					<li class="fragment">3. Revisa el código y contribuye en <a href="https://github.com/n8n-io/n8n"
+							target="_blank">GitHub</a>.</li>
+				</ul>
+			</section>
+
+			<!-- Slide 10: Questions -->
+			<section>
+				<h2 class="text-6xl">¿Preguntas?</h2>
+				<h3 class="text-6xl">Encuesta</h3>
+				<img src="qr-code.png" alt="n8n Logo"
+					style="height: 350px; margin: 20px auto; border: none; background: none; box-shadow: none;">
+			</section>
+
 		</div>
+	</div>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-				plugins: [ RevealHighlight ]
-			});
-		</script>
-	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			plugins: [RevealHighlight]
+		});
+	</script>
+</body>
+
 </html>
